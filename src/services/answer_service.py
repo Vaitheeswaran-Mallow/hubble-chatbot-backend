@@ -452,7 +452,7 @@ Instructions:
 1. Format the data in a clear, organized way
 2. Highlight key information that answers the user's question
 3. If there are multiple results, summarize them appropriately
-4. Ensure that the answer is properly aligned according to the HTML content, parsed as a string.
+4. Output should be a readable string without no markdown or code blocks.
 5. Be concise but informative
 6. If the data contains sensitive information, be careful about what you include
 
