@@ -30,6 +30,11 @@ from markitdown import MarkItDown
 from fastapi import Request, BackgroundTasks
 import json
 import httpx
+try:
+    # Use the existing endpoint implementation to broadcast
+    from ws.routes import publish_room_message as ws_publish_room_message
+except Exception:
+    ws_publish_room_message = None
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -491,11 +496,7 @@ async def ask_question(
         include_follow_ups: Whether to include suggested follow-up questions
     """
     try:
-        if background_tasks is None or request is None:
-            raise HTTPException(status_code=500, detail="Background tasks or request not available")
-
-        publish_url = request.url_for("publish_room_message", room=params.user_id)
-
+        # Schedule background processing without blocking the response
         async def process_and_publish():
             try:
                 query_embedding = embedding_service.generate_embedding(params.question)
@@ -518,12 +519,19 @@ async def ask_question(
                     "follow_up_questions": answer_data.get("follow_up_questions", []),
                 }
 
-                async with httpx.AsyncClient(timeout=10.0) as client:
-                    await client.post(str(publish_url), params={"message": json.dumps(payload)})
+                # Prefer direct call to the existing endpoint function to avoid self-HTTP calls
+                if ws_publish_room_message is not None:
+                    await ws_publish_room_message(params.user_id, json.dumps(payload))
+                else:
+                    # Fallback to HTTP call if function is unavailable
+                    if request is not None:
+                        publish_url = request.url_for("publish_room_message", room=params.user_id)
+                        async with httpx.AsyncClient(timeout=10.0) as client:
+                            await client.post(str(publish_url), params={"message": json.dumps(payload)})
             except Exception as bg_err:
                 logger.error(f"Background processing failed: {bg_err}")
 
-        background_tasks.add_task(process_and_publish)
+        asyncio.create_task(process_and_publish())
 
         return {"status": "success", "queued": True}
 
