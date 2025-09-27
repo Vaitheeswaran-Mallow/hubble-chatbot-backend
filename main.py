@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from settings import config
 from langchain_openai import OpenAI
 from db import get_chroma_client
@@ -18,6 +19,15 @@ from typing import Optional
 import sqlite3
 
 app = FastAPI(title="Hubble Chatbot Backend")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=config.cors_allow_origins,
+    allow_credentials=config.cors_allow_credentials,
+    allow_methods=config.cors_allow_methods,
+    allow_headers=config.cors_allow_headers,
+)
 
 def get_markdown_converter():
     """Initialize and return a Markitdown instance."""
