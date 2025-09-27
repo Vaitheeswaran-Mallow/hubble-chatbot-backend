@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endorsement Process RAG System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-section {
+            margin-bottom: 30px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        
+        .search-button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .clear-button {
+            background-color: #6c757d;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .clear-button:hover {
+            background-color: #545b62;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .result-section {
+            margin-top: 30px;
+        }
+        
+        .answer-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .similar-processes {
+            margin-top: 20px;
+        }
+        
+        .process-item {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .process-id {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .process-text {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .similarity-score {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .stats-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .categories {
+            margin-top: 20px;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Endorsement Process RAG System</h1>
+        
+        <div class="stats-section">
+            <h3>System Statistics</h3>
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalProcesses">-</div>
+                    <div class="stat-label">Total Processes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="vectorDocs">-</div>
+                    <div class="stat-label">Vector Documents</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="categories">-</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="emailTemplates">-</div>
+                    <div class="stat-label">Email Templates</div>
+                </div>
+            </div>
+            
+            <div class="categories">
+                <h4>Available Categories:</h4>
+                <div id="categoryTags"></div>
+            </div>
+        </div>
+        
+        <div class="search-section">
+            <h3>Ask a Question</h3>
+            <input type="text" id="questionInput" class="search-box" 
+                   placeholder="e.g., How do I request access to Bitbucket? Who approves software installations?">
+            <button onclick="searchProcesses()" class="search-button">Search</button>
+            <button onclick="clearResults()" class="clear-button">Clear</button>
+        </div>
+        
+        <div id="loadingDiv" class="loading" style="display: none;">
+            Searching for relevant processes...
+        </div>
+        
+        <div id="resultSection" class="result-section" style="display: none;">
+            <div id="answerBox" class="answer-box"></div>
+            <div id="similarProcesses" class="similar-processes"></div>
+        </div>
+        
+        <div id="errorDiv" class="error" style="display: none;"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        // Load system stats on page load
+        window.onload = function() {
+            loadStats();
+        };
+        
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_BASE}/stats`);
+                const stats = await response.json();
+                
+                document.getElementById('totalProcesses').textContent = stats.data_stats.total_processes || 0;
+                document.getElementById('vectorDocs').textContent = stats.vector_db_documents || 0;
+                document.getElementById('categories').textContent = Object.keys(stats.data_stats.categories || {}).length;
+                document.getElementById('emailTemplates').textContent = stats.data_stats.processes_with_email_templates || 0;
+                
+                // Load categories
+                const categoriesResponse = await fetch(`${API_BASE}/categories`);
+                const categoriesData = await categoriesResponse.json();
+                
+                const categoryTagsDiv = document.getElementById('categoryTags');
+                categoryTagsDiv.innerHTML = '';
+                categoriesData.categories.forEach(category => {
+                    const tag = document.createElement('span');
+                    tag.className = 'category-tag';
+                    tag.textContent = category;
+                    categoryTagsDiv.appendChild(tag);
+                });
+                
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+        
+        async function searchProcesses() {
+            const question = document.getElementById('questionInput').value.trim();
+            if (!question) {
+                alert('Please enter a question');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loadingDiv').style.display = 'block';
+            document.getElementById('resultSection').style.display = 'none';
+            document.getElementById('errorDiv').style.display = 'none';
+            
+            try {
+                const response = await fetch(`${API_BASE}/query?question=${encodeURIComponent(question)}&n_results=5`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                // Hide loading
+                document.getElementById('loadingDiv').style.display = 'none';
+                
+                // Show results
+                displayResults(result);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loadingDiv').style.display = 'none';
+                document.getElementById('errorDiv').style.display = 'block';
+                document.getElementById('errorDiv').textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        function displayResults(result) {
+            // Display answer
+            const answerBox = document.getElementById('answerBox');
+            answerBox.innerHTML = `<h4>Answer:</h4><p>${result.answer}</p>`;
+            
+            // Display similar processes
+            const similarProcessesDiv = document.getElementById('similarProcesses');
+            similarProcessesDiv.innerHTML = '<h4>Similar Processes:</h4>';
+            
+            result.similar_processes.forEach((process, index) => {
+                const processDiv = document.createElement('div');
+                processDiv.className = 'process-item';
+                
+                processDiv.innerHTML = `
+                    <div class="process-id">Process ID: ${process.id}</div>
+                    <div class="process-text">${process.document}</div>
+                    <div class="similarity-score">Similarity Score: ${(process.similarity_score * 100).toFixed(1)}%</div>
+                `;
+                
+                similarProcessesDiv.appendChild(processDiv);
+            });
+            
+            document.getElementById('resultSection').style.display = 'block';
+        }
+        
+        function clearResults() {
+            document.getElementById('questionInput').value = '';
+            document.getElementById('resultSection').style.display = 'none';
+            document.getElementById('errorDiv').style.display = 'none';
+            document.getElementById('loadingDiv').style.display = 'none';
+        }
+        
+        // Allow Enter key to search
+        document.getElementById('questionInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProcesses();
+            }
+        });
+    </script>
+</body>
+</html>
