@@ -521,10 +521,10 @@ async def ask_question(
                     
                     answer_data["follow_up_questions"] = follow_ups
 
+                # Create payload with only the answer for WebSocket broadcast
                 payload = {
                     "type": "answer",
                     "user_id": params.user_id,
-                    "question": params.question,
                     "answer": answer_data.get("answer"),
                     "confidence": answer_data.get("confidence"),
                     "sources": answer_data.get("sources"),
@@ -536,13 +536,16 @@ async def ask_question(
 
                 # Prefer direct call to the existing endpoint function to avoid self-HTTP calls
                 if ws_publish_room_message is not None:
-                    await ws_publish_room_message(params.user_id, json.dumps(payload))
+                    # Only publish the answer text, not the full JSON payload
+                    answer_text = answer_data.get("answer", "Sorry, I couldn't process your question.")
+                    await ws_publish_room_message(params.user_id, answer_text)
                 else:
                     # Fallback to HTTP call if function is unavailable
                     if request is not None:
                         publish_url = request.url_for("publish_room_message", room=params.user_id)
+                        answer_text = answer_data.get("answer", "Sorry, I couldn't process your question.")
                         async with httpx.AsyncClient(timeout=10.0) as client:
-                            await client.post(str(publish_url), params={"message": json.dumps(payload)})
+                            await client.post(str(publish_url), params={"message": answer_text})
             except Exception as bg_err:
                 logger.error(f"Background processing failed: {bg_err}")
 
