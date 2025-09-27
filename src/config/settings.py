@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     # OpenAI Configuration
     open_api_key: str
     
+    # Database Configuration
+    database_url: str = "sqlite:///./hubble.db"
+    
     # File Paths
     excel_file_path: str = "data/Endorsement Process Excel.xlsx"
     chroma_db_path: str = "./chroma_db"

@@ -499,12 +499,26 @@ async def ask_question(
         # Schedule background processing without blocking the response
         async def process_and_publish():
             try:
+                # Generate embedding for document search (always do this as fallback)
                 query_embedding = embedding_service.generate_embedding(params.question)
                 search_results = vector_store.search_similar(query_embedding, params.n_results)
-                answer_data = answer_service.generate_answer(params.question, search_results)
+                
+                # Use the new classification and answer system
+                answer_data = answer_service.classify_and_answer(params.question, search_results)
 
                 if answer_data.get("confidence") != "error":
-                    follow_ups = answer_service.generate_follow_up_questions(params.question, search_results)
+                    # Generate follow-up questions based on the type of answer
+                    if answer_data.get("query_type") == "database":
+                        # For database queries, generate different follow-ups
+                        follow_ups = [
+                            "Can you show me more details about this data?",
+                            "What other information is available about this?",
+                            "Can you help me with a related query?"
+                        ]
+                    else:
+                        # For document queries, use existing follow-up generation
+                        follow_ups = answer_service.generate_follow_up_questions(params.question, search_results)
+                    
                     answer_data["follow_up_questions"] = follow_ups
 
                 payload = {
@@ -516,6 +530,7 @@ async def ask_question(
                     "sources": answer_data.get("sources"),
                     "search_results_count": answer_data.get("search_results_count"),
                     "model_used": answer_data.get("model_used"),
+                    "query_type": answer_data.get("query_type", "document"),
                     "follow_up_questions": answer_data.get("follow_up_questions", []),
                 }
 
@@ -562,19 +577,36 @@ async def ask_detailed_question(
         # Search for relevant documents
         search_results = vector_store.search_similar(query_embedding, n_results)
 
-        # Generate detailed answer
-        answer_data = answer_service.generate_answer_with_sources(
-            question, search_results, include_full_context
-        )
+        # Use the new classification and answer system
+        answer_data = answer_service.classify_and_answer(question, search_results)
+
+        # Add detailed sources if it's a document query
+        if answer_data.get("query_type") == "document":
+            detailed_sources = []
+            for i, result in enumerate(search_results, 1):
+                metadata = result.get('metadata', {})
+                detailed_sources.append({
+                    "source_id": i,
+                    "document_name": metadata.get('document_name', 'Unknown'),
+                    "chunk_index": metadata.get('chunk_index', 0),
+                    "text_preview": result.get('text', '')[:200] + "..." if len(result.get('text', '')) > 200 else result.get('text', ''),
+                    "similarity_score": 1 - result.get('distance', 0) if 'distance' in result else None,
+                    "token_count": metadata.get('token_count', 0)
+                })
+            answer_data["detailed_sources"] = detailed_sources
+            
+            if include_full_context:
+                answer_data["full_context"] = [result.get('text', '') for result in search_results]
 
         return {
             "question": question,
             "answer": answer_data["answer"],
             "confidence": answer_data["confidence"],
             "sources": answer_data["sources"],
-            "detailed_sources": answer_data["detailed_sources"],
+            "detailed_sources": answer_data.get("detailed_sources", []),
             "search_results_count": answer_data["search_results_count"],
             "model_used": answer_data["model_used"],
+            "query_type": answer_data.get("query_type", "document"),
             "full_context": answer_data.get("full_context", [])
         }
 
@@ -603,17 +635,25 @@ async def chat(
         # Search for relevant documents
         search_results = vector_store.search_similar(query_embedding, n_results)
 
-        # Generate answer
-        answer_data = answer_service.generate_answer(message, search_results)
+        # Use the new classification and answer system
+        answer_data = answer_service.classify_and_answer(message, search_results)
 
-        # Generate follow-up questions
-        follow_ups = answer_service.generate_follow_up_questions(message, search_results)
+        # Generate follow-up questions based on query type
+        if answer_data.get("query_type") == "database":
+            follow_ups = [
+                "Can you show me more details about this data?",
+                "What other information is available about this?",
+                "Can you help me with a related query?"
+            ]
+        else:
+            follow_ups = answer_service.generate_follow_up_questions(message, search_results)
 
         return {
             "message": message,
             "response": answer_data["answer"],
             "confidence": answer_data["confidence"],
             "sources_count": len(answer_data["sources"]),
+            "query_type": answer_data.get("query_type", "document"),
             "follow_up_suggestions": follow_ups
         }
 
