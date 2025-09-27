@@ -12,7 +12,7 @@ async def websocket_room(websocket: WebSocket, room: str):
         while True:
             data = await websocket.receive_text()
             await manager.send_personal(f"You wrote: {data}", websocket)
-            await manager.broadcast(room, f"[{room}] {data}")
+            # removed broadcast of incoming client messages to avoid duplicating questions in the room
     except WebSocketDisconnect:
         manager.disconnect(room, websocket)
         await manager.broadcast(room, f"[system] a client left {room}")
