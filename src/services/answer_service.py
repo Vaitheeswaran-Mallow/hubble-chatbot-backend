@@ -377,7 +377,7 @@ CRITICAL INSTRUCTIONS:
 8. For user searches, try multiple fields: name, employee_id, email
 9. Use proper date formatting for SQLite
 10. Make sure the query is syntactically correct
-11. Make sure the answer key in output is just plain text
+
 
 Examples of good queries:
 - SELECT u.name, u.employee_id, d.name as designation FROM users u LEFT JOIN designations d ON u.designation_id = d.id WHERE u.name LIKE '%john%';
@@ -452,7 +452,7 @@ Instructions:
 1. Format the data in a clear, organized way
 2. Highlight key information that answers the user's question
 3. If there are multiple results, summarize them appropriately
-4. Use bullet points or tables when helpful
+4. Ensure that the answer is properly aligned according to the HTML content, parsed as a string.
 5. Be concise but informative
 6. If the data contains sensitive information, be careful about what you include
 
