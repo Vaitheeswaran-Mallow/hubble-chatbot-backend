@@ -65,8 +65,10 @@ class DocumentProcessor:
         """
         chunks = self.split_text(document_text)
         
-        # Add document-level metadata to each chunk
-        for chunk in chunks:
+        # Add document-level metadata to each chunk and create unique IDs
+        for i, chunk in enumerate(chunks):
+            # Create unique ID that includes document name
+            chunk["id"] = f"{document_name}_chunk_{i}"
             chunk["document_name"] = document_name
             chunk["source"] = document_name
         

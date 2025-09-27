@@ -54,7 +54,7 @@ class AnswerService:
         context = "\n\n".join(context_parts)
         
         prompt = f"""You are a helpful assistant that answers questions based on the provided document context. 
-Use only the information from the provided context to answer the user's question.
+Use only the information from the provided context to answer the user's question. Your bot that answers questions related Mallow Technologies. Ignore other questions.
 
 Context from documents:
 {context}
