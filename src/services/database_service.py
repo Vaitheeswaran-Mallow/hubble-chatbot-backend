@@ -47,7 +47,7 @@ class DatabaseService:
         Tables and their key columns:
         
         1. users - Employee information
-           - id, employee_id, email, name, username, status, team_id, branch_id, designation_id
+           - id, employee_id, email, name, username, status - ENUM(intern, probationer, working, in-notice-period, relieved, project_intern), team_id, branch_id, designation_id
            - first_name, last_name, is_employed, active_status, personal_email
            - created_at, updated_at, deleted_at
         
