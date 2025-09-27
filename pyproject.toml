@@ -1,0 +1,7 @@
+[project]
+name = "hubble-chatbot-backend"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[all]>=0.117.1",
+]
