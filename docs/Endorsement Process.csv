@@ -1,0 +1,392 @@
+S. No,Management of,Actions,Initiator,Approver,Executer,Post Execution Confirmation,Email Details,,
+,,Actions for which request to be raised,The resource mentioned here needs to raise the request for an action,The request raised has to be approved by the authorised persons mentioned here against respective request,"On approval from the approver, the executor has to execute the request","Once the request is executed, the completion of the request should be acknowledged / confirmed as mentioned here.",,,
+1,Application installations and upgrades,"Install External applications in Macbooks
+
+External Applications - Applications other than those developed by Apple",Individual Employee to request installation mentioning the application to be installed along with the reason,Project Owner / Team Lead / Executives,Individual Employee to install with the help of Network team,Send a confirmation to Network team once the application is installed,"To : Project Owner  / Team Lead 
+CC: network-team@mallow-tech.com,pm@mallow-tech.com, ciso@mallow-tech.com, Project BA
+
+Subject : Request to install External Application",,`
+2,,"Install External applications in mobiles / iPads / tablets 
+
+External Applications - Applications those are not developed by Mallow",Individual Employee to request installation mentioning the application to be installed along with the reason,Yogesh (yogesh@mallow-tech.com) to approve.,Individual Employee to install with the help of Network team,Send a confirmation to Network team once the application is installed,"To : yogesh@mallow-tech.com, network-team@mallow-tech.com
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, Project BA, Project Owner, Team lead, Device Managers
+
+Subject : Request to install External Application
+
+Note:
+Device Manager for iOS - arunachalam@mallow-tech.com
+Device Manager for Android - dhanaprakash@mallow-tech.com",,
+3,,Software upgrades / patches,Individual Employee to request the software upgrade,Team Lead / Project Owners to approve,Individual Employee to proceed the upgrade with the help of Network team,Send a confirmation to Network team once the upgrade is completed,"To : Project Owner  / Team lead  
+CC: network-team@mallow-tech.com,pm@mallow-tech.com, ciso@mallow-tech.com, Project BA
+
+Subject : Request for Software upgrade",,
+4,Network restrictions,Approval to restricted sites,"Individual Employee to request access for restricted site, mentioning the reason",Team Lead / Project Owners to approve,Network Team to remove restriction on the requested site,Network team to confirm back to the requester that the restriction is revoked.,"To : Project Owner / Team lead
+CC: network-team@mallow-tech.com,pm@mallow-tech.com, ciso@mallow-tech.com, Project BA
+
+Subject : Request to access a restricted site",,
+5,,To connect devices to Mallow’s Network(Personal Devices),Individual Employee to request access,Project Owner / Team Lead / Executives,Individual Employee to connect with the help of Network team,-,"To : Project Owner / Team Lead 
+CC: network-team@mallow-tech.com,pm@mallow-tech.com, ciso@mallow-tech.com, Project BA
+
+Subject : Request to Connect to Mallow's network",,
+6,Email ID for Project,To create an email ID for a project,"BA / Project Owner / Senior Developer to request access, with the email ID that needs to be created mentioning the project name",Project Owner / Executives to approve,Network Team to create the requested email ID,Network team to confirm the requester on creation of the email ID,"To : network-team@mallow-tech.com, Project Owner, pm@mallow-tech.com
+CC: ciso@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for creation of project email ID",,
+7,,To add / remove user from forwarder list,BA / Project Owner / Senior Developer to request addition / removal of the users to the forwarder list,Project Owner / Executives to approve,Network Team to action the addition or removal of the users,Network team to confirm the requester that the request is actioned,"To : network-team@mallow-tech.com, Project Owner, pm@mallow-tech.com
+CC: ciso@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for addition / removal of user in the forwarder list",,
+8,Bitbucket Access,Access for an existing repository in Bitbucket,Developers to request mentioning the project and the Repo name.,Project Owner / Executives Team to approve,Network Team to give access,Network team to inform the requester Back that the access if granted,"To : Project Owner, pm@mallow-tech.com, network-team@mallow-tech.com,
+CC:  ciso@mallow-tech.com, Project BA, Team lead, Reporting Person Email ID
+
+Subject : Request of Bit Bucket access for xxxx Project ",,
+9,,Create a new reporsitory,"Senior Developer to request, mentioning the project and the name of the repository to be created",Project Owner / Executives Team to approve,Network Team to create the requested repository,Network team to inform the requester back that the repository is created,"To : Project Owner, pm@mallow-tech.com, network-team@mallow-tech.com,
+CC:  ciso@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for creation of a new repository",,
+10,AWS Account,Separate AWS Account Creation for a Project,Senior developer to request creation mentioning the project name,Senior developer to request creation mentioning the project name,DevOps resource (Mounickraj / Abishek) to create the account,"DevOps team (Mounickraj / Abishek ) to confirm back the requester that the AWS account has been created along with the credential details (If applicable)
+
+Note: For Internal Project, please Network team and client projects DevOps team","To : Project Owner, pm@mallow-tech.com, mounickraj@mallow-tech.com, abishek@mallow-tech.com, network-team@mallow-tech.com 
+
+CC: ciso@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for addition / removal of user in the forwarder list""",,
+11,,Access for the project’s AWS account managed by Mallow / Client,Respective developer to request access mentioning the reason,Project Owner to approve,Project’s AWS account Admin to grant access (Mounickraj / Abishek),"Project’s AWS account Admin to confirm on the completion of the request.
+
+Note: 
+1. User needs to login with SSO.
+2. For Internal Project, please contact Network team instead of DevOps team.
+3. Even for client project (If the Root user is client and IAM user is from Mallow), we need the email approval and user needs to login with SSO.","To : Project Owner, mounickraj@mallow-tech.com / abishek@mallow-tech.com, network-team@mallow-tech.com 
+
+CC : pm@mallow-tech.com, ciso@mallow-tech.com, Project BA, devops-team@mallow-tech.com, network-team@mallow-tech.com
+
+Subject : Access for the project’s AWS account",,
+12,,Creation or Amendment to IAM users / policies in AWS,Individual Employee to request,Project Owner to approve,Particular project's AWS account Admin (Mounickraj / Abishek),"The Project’s AWS account admin to confirm back on the completion of the request.
+
+Note: For Internal Project, please Network team and client projects DevOps team","To : Project Owner, mounickraj@mallow-tech.com / abishek@mallow-tech.com, network-team@mallow-tech.com 
+
+CC : pm@mallow-tech.com, ciso@mallow-tech.com, Project BA, Reporting Person Email ID, network-team@mallow-tech.com
+
+Subject : Creation or Amendment to IAM users / policies",,
+13,"App Store and Play store account 
+
+Note: Before proceeding the process concern Project BA need to check with client and grant the access for the Project Owner.",App store account access,Individual Developer to request,Project Owner to approve,Project Owner need to provide the access,Project Owner to confirm back the requester on the access,"To : Project Owner
+
+CC : Project BA, pm@mallow-tech.com, ciso@mallow-tech.com
+
+Subject : Request on App Store account access for (Project name)",,
+14,,Play store account access,Individual Developer to request,Project Owner to approve,Project Owner need to provide the access,Project Owner to confirm back the requester on the access,"To : Project Owner
+
+CC : Project BA, pm@mallow-tech.com, ciso@mallow-tech.com
+
+Subject : Request on Play Store account access for (Project name)",,
+15,Jetbrain Access,Jetbrains Account Purchase ,Network Team to request,Executives Team to approve,Network team to purchase with the help of Finance Team,Network team to confirm finance team that the purchase is done.,"To : pm@mallow-tech.com, network-team@mallow-tech.com
+CC: ciso@mallow-tech.com, finance@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for Purchase of Jetbrains account",,
+16,,Jetbrains (Rubymine / PHP Storm / Webstorm) Tools purchase / Upgrade,"Individual Employee to request, mentioning the reason for need",Project Owner / Executives Team to approve,Network team to purchase / upgrade with the help of Finance Team,Network team to confirm the requester once the upgrade / purchase has been done.,"To : Project Owner, pm@mallow-tech.com, finance@mallow-tech.com
+CC: ciso@mallow-tech.com, Project BA, Team lead
+
+Subject : Request of Jetbrains Tool",,
+17,Test sigma Access,Test Sigma Access to an existing project,Individual Employee to request mentioning the project,Project Owner / Executives Team to approve,Network Team to give access,Network Team to confirm the requester back that the access is granted,"To : Project Owner
+CC: pm@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com, Project BA, Team lead, jagajeevan@mallow-tech.com
+
+Subject : Request for Test sigma access",,
+18,,Creation of a new project in Test sigma,Individual Employee / Project BA to request mentioning the project,Project Owner / Executives Team to approve,Network Team to create the project,Network Team to confirm the requester back that the new project is created,"To : Project Owner
+CC: pm@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com, Project BA, Team lead, jagajeevan@mallow-tech.com
+
+Subject : Creation of new project in Test sigma",,
+19,Zeplin / Sketch Access,Zeplin / Sketch Access for an existing project,Respective individual to request / Project BA,"Project Owner / Executives Team to approve
+
+Note : If it is Team related, Team Owner is needs to approve the request",Network Team to grant access,Network Team to confirm the requester back that the access is granted,"To : Project Owner, pm@mallow-tech.com, network-team@mallow-tech.com
+CC: ciso@mallow-tech.com, Project BA, Team lead 
+
+Subject : Request for Zeplin / Sketch access",,
+20,,Create a new project in Zeplin / Sketch,Design Team member / Project BA to request mentioning the project,Project Owner / Executives Team to approve,Network Team to create the project,Network Team to confirm the requester back that the account is created,"To : Project Owner, pm@mallow-tech.com, network-team@mallow-tech.com
+CC: ciso@mallow-tech.com, Project BA, Team lead 
+
+Subject : Request for the creation of a project in Zeplin / Sketch",,
+21,Mantis Access,User Account creation / deletion in Mantis,Individual Employee to request,Jagajeevan Chakravarthy (jagajeevan@mallow-tech.com),Network Team to create the User and share the details,Network Team needs to confirm the requester back that the request is actioned,"To : jagajeevan@mallow-tech.com, network-team@mallow-tech.com
+
+CC : pm@mallow-tech.com, ciso@mallow-tech.com, Project Owner, BA
+
+Subject : Request for user creation in Mantis",,
+22,,Project Account creation in Mantis,Project BA / Senior Developer to request,Project Owner to approve the request,Network Team needs to create the project account,Network Team needs to confirm the requester back that the request is actioned,"To : Project Owner, network-team@mallow-tech.com
+
+CC : pm@mallow-tech.com, ciso@mallow-tech.com, jagajeevan@mallow-tech.com, Project Owner
+
+Subject : Request for project creation in Mantis",,
+23,Design elements Access / purchase,Photoshop Access,Design Team member to request,Project Owner / Executives Team to approve,Design Team Lead to grant access (Vadivel),Design Team Lead to confirm the requester back that the access is granted,"To : Project Owner, pm@mallow-tech.com, vadivel@mallow-tech.com
+CC: network-team@mallow-tech.com, ciso@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for Photoshop access",,
+24,,Purchase of Sketch License,Design Team member to request mentioning the workspace and project details,Project Owner / Executives Team to approve,Design Team Lead (Vadivel) to purchase with the help of Finance Team,Design Team Lead to confirm back the requester,"To : Project Owner / pm@mallow-tech.com, finance@mallow-tech.com, vadivel@mallow-tech.com
+CC:  ciso@mallow-tech.com, network-team@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for Purchase of Sketch License",,
+25,Course Purchase,Purchase of Udemy course,Individual Employee to request mentioning the course details and use,Project Owner / Team Lead / Executives Team to approve,Finance Team to purchase the course,Finance Team to confirm the requester on the purchase of the course,"To : Project Owner / pm@mallow-tech.com, finance@mallow-tech.com
+CC: ciso@mallow-tech.com, network-team@mallow-tech.com, Team lead, Reporting Persom email ID
+
+Subject : Request for Purchase of Udemy Course",,
+26,General process for purchase or payments,"Any other tool purchase, Image/Theme/Template purchase, System / Mobile Purchase or payments for the project / Office use.",Concern Person / Project BA / Senior Developer to request,Project Owner / Team Lead / Executives Team to approve,Concern Person / Project BA / Senior Developer to purchase with the help of Finance team,Request initiator to confirm back Finance team that the tool purchase is done with invoice.,"To : Team Lead / Project Owner / pm@mallow-tech.com
+
+CC: finance@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com, Team Lead
+
+Subject : Purchase of - xxxxx
+
+Note : All Payment request needs to be approved by Kamal for 2nd level approval.",,
+27,Device Requests,Purchase of Network Devices,Individual Employee to request mentioning the details of the device and the need,Project Owner / Executives Team to approve,Network team to purchase with the help of the Finance team,Network team to update the requester back that the device is purchased,"To : Project Owner / pm@mallow-tech.com, finance@mallow-tech.com
+CC: ciso@mallow-tech.com, network-team@mallow-tech.com, Project BA, Team lead
+
+Subject : Request for Purchase of Device - xxxx",,
+28,,Testing Device for project,Project BA to request mentioning the project and reason,Project Owner to approve,Network Team to action,Network team to update the requester back on the allocated device details and the date from when the device can be taken for the project,"To : Project Owner,  network-team@mallow-tech.com
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, dhanaprakash@mallow-tech.com, arunachalam@mallow-tech.com
+
+Subject : Request for Testing device allocation",,
+29,,Addition of a new iOS Device in Mallow's pool,Network Team to share the UDID of the new device along with OS version and model name details to iOS team and request to add in the device list of all the current projects.,Mobile Team lead (Yogesh (yogesh@mallow-tech.com)) to approve the new device addition,iOS Team Members to add the UDID in their respective projects,All iOS Team members to confirm back to Network team on addition of the new device in their projects,"To : yogesh@mallow-tech.com, ios-team@mallow-tech.com
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, ba-team@mallow-tech.com, network-team@mallow-tech.com
+
+Subject : Addition of new iOS device to Mallow’s pool",,
+30,,Addition of new iOS Device provided by client,Project BA / Senior Developer to share below details and request the developer to add in the device list of the project,Mobile Team lead (Yogesh (yogesh@mallow-tech.com)) to approve the new device addition,Respective Project’s developer to add the UDID in project,The Developer to confirm back to the project BA on addition of the new device in the project,"To : yogesh@mallow-tech.com, Project Developer
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, network-team@mallow-tech.com, Project Owner
+
+Subject : Addition of new iOS device to (Project name) device list",,
+31,Resource planning,Addition of a resource into a project,Respective Project BA or the Senior resource in the project,Project Owner (Exiting / New) / Executives to approve,"- Dinesh (BA team) (dineshckp@mallow-tech.com) to update the resource in the Hubble.
+
+- Network Team need to provide the repo access, Design related and the mantis access for the project (if any)
+
+- Existing Project owner needs to provide approval for the change.","For resource addition request - Respective BA to send an additional request to Project Owner / Executive to get an approval.
+
+BA need to get the Bitbucket Repo name from project owner for which the new resource need access, also to get the Mantis access for the Project to get these approved during the addition. Once approved Network team will provide the access for the mentioned Repo name, design related and Mantis access for the project.","To : Project Owner (New Project and Existing Project) / pm@mallow-tech.com
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, network-team@mallow-tech.com, Team lead, hr@mallow-tech.com, Project BA, dineshckp@mallow-tech.com, jagajeevan@mallow-tech.com
+
+Subject : Request for addition of resource - xxxx
+
+Note : Once approved,
+- Existing Project owner needs to approve the request*
+- Dinesh (BA Team) will update in Hubble.
+- Network Team will provide the repo access, design related and mantis access for the project (if any)
+
+Mandatory Fields:
+
+-Resource Name, Email
+-Parent Project Name
+-Percentage Utilisation
+-Allocation From
+-Resource Type
+-Utilisation Start Date
+-Reporting Person
+-Other project related access (Repository, Mantis, Sketch, Figma and etc...)
+
+Optional Fields:
+
+- Allocation To (mention if applicable)
+- Utilisation End Date (if not sure, please mention as “Ongoing”)",,
+32,,Removal of a resource from a project,Respective Project BA or the senior resource in the project,Project Owner / Executives to approve,"- Dinesh (BA team) (dineshckp@mallow-tech.com) to update the resource in the Hubble.
+
+- Network Team need to remove the repo access, design related and the mantis access for the project (if any)","For resource Removal - Respective BA to send an removal request to Project Owner / Executive to get an approval.
+
+BA need to provide the Bitbucket Repo name from the project owner for which the resource having access, also to menitoned the Mantis access of the Project during the approval. Once approved Network team will revoke the access for the mentioned Repo name, design related and Mantis access for the project.
+
+Note: If any Bitbucket access is needed for some particular time period, then it needs to be mention in the email.","To : Project Owner / pm@mallow-tech.com
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, network-team@mallow-tech.com, Team lead, hr@mallow-tech.com, Project BA, dineshckp@mallow-tech.com,jagajeevan@mallow-tech.com
+
+Subject : Request for addition of resource - xxxx
+
+Note : Once approved,
+
+- Dinesh (BA Team) will update in Hubble.
+- Network Team will remove the repo access, design related and mantis access for the project (if any).",,
+33,,Increase / Decreasing the resource utilisation,Respective Project BA or the senior resource in the project,Project Owner / Executives to approve,Dinesh (BA team) (dineshckp@mallow-tech.com) to update the resource in the Hubble.,"Once the request is executed, Dinesh (BA team) need to send the acknowledgement","To : Project Owner / pm@mallow-tech.com
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, network-team@mallow-tech.com, Team lead, hr@mallow-tech.com, Project BA, dineshckp@mallow-tech.com, jagajeevan@mallow-tech.com
+
+Subject : Request for increase/decrease of resource utilisation - xxxx
+
+Note : Once approved,
+
+- Dinesh (BA Team) will update in Hubble.",,
+34,Leaves & Permissions,Comp-Off Leaves,Employee  / Project BA to request mentioning the number of Comp-Off required days.,Project Owner / Executives Team to approve,HR Team will send email to the Comp off eligible employees,HR Team to note the Comp Off and share the notice period for the Comp Off to be used to the resource.,"To : Project Owner Email ID  / pm@mallow-tech.com
+
+CC: hr@mallow-tech.com, ciso@mallow-tech.com, admin-team@mallow-tech.com
+
+Subject : Request Approval for Comp-Off",,
+35,,Day Off Leave ,Employee / Project Intern / Intern to directly raise in Hubble,Respective leave Approvers to approve.,-,"The resource can take the leave, on approval of it.
+
+On unplanned scenarios, the resource can get approval over a call and take the leave. The Primary project reporting person / Team Lead / Project Owner can apply the leave in Hubble. Once the resource is back to work, he need to confirm it.",To be applied in Hubble,,
+36,,Time Off (Permissions),Employee / Project Intern / Intern to directly raise in Hubble,Respective leave Approvers to Approve,-,"The resource can take the permission, on approval of it. It should be applied in the Hubble - Time Off.
+
+On unplanned scenarios, the resource can get approval over a call and take the permission. The Primary project reporting person / Team Lead / Project Owner can apply the leave in Hubble. Once the resource is back to work, he need to confirm it and he need to compensate within the month.",To be applied in Hubble,,
+37,,Work From Home (WFH),"Individual Employee to request (Same email thread need to be used, instead of mutliple emails)",Project Owner / Executives Team to approve,-,"Project Owner / Team lead need to send reply email for the request (Approve / Reject)
+
+Note : If they are sending in seperate email conversation, reply them to use old email thread/conversation.","To : Project Owner / Team Lead 
+
+CC: hr@mallow-tech.com, ciso@mallow-tech.com, admin-team@mallow-tech.com, pm@mallow-tech.com, Reporting Person email ID
+
+Subject : Request Approval for Work From Home",,
+38,Creation of Sub-Domain,To create a Sub-Domain,"BA / Project Owner to request, with the Project name.",Project Owner / Executives Team to approve,Network Team to create / add the sub-domain,Network team to send email to the requester on the completion of the request,"To : network-team@mallow-tech.com
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, Team lead, Project Owner
+
+Subject : Creation of Sub-Domain (Project Name)
+
+Note : For creating in Mallow domain, approval needs to be given by Manivel rather than the Project owner.",,
+39,Timesheet Access,Timesheet Approval / Authorise Access,Individual Employee to request access,Project Owner / Team Lead / Executives Team to approve,HR Team / Admin Team to grant access,HR Team / Admin Team to confirm back the requester that the access is granted.,"To : Project Owner Email ID  / Team Lead
+
+CC: hr@mallow-tech.com, ciso@mallow-tech.com, pm@mallow-tech.com, admin-team@mallow-tech.com, Reporting Person email ID
+
+Subject : Request Approval for Timesheet approval  / authorise access",,
+40,Laptop for Interns,Laptop need for Interns,Respective Intern to request,Team Lead to approve,Network Team to provide,Network team to send email to the requester on the completion of the request,"To : Team lead, network-team@mallow-tech.com
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, hr@mallow-tech.com, Reporting Person email ID
+
+Subject : Request for laptop provision",,
+41,New account creations,"Email ID creation and adding in group E-mail ID
+Bug Tracker Account creation
+Hubble Account creation
+Biometric(Thump) Access creation
+ID Card
+EPFO / ESIC
+Salary Account Opening",HR Assistant to Concern teams,-,Concern team need to take action.,Concern person need to send email for the completion of the request,"To : hr@mallow-tech.com, network-team@mallow-tech.com
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, admin-team@mallow-tech.com, anandhan@mallow-tech.com, yogesh@mallow-tech.com, sathish@mallow-tech.com, jayaprakash@mallow-tech.com, Team lead, jagajeevan@mallow-tech.com
+
+Subject : Induction for on Boarding - Employees / Internship / Apprentice / Trainee / Project Intern",,
+42,Access request - Hubble,"Trainee Oversee access (Batch Incharge)
+Project Inter Mentor access (Project Intern Mentors)",HR Associate to request,Trainee Team (yogesh@mallow-tech.com / anandhan@mallow-tech.com) to approve,Admin Team to take action,Admin team to send email to the requester on the completion of the request,"To : yogesh@mallow-tech.com / anandhan@mallow-tech.com, admin-team@mallow-tech.com
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, sathish@mallow-tech.com, jayaprakash@mallow-tech.com, Team lead
+
+Subject : Hubble Access request",,
+43,Access revoke - Hubble ,"Trainee Oversee access revoke
+Project Inter Mentor access revoke
+",HR Associate to request,Trainee Team (yogesh@mallow-tech.com / anandhan@mallow-tech.com) to approve,Admin Team to take action,Admin team to send email to the requester on the completion of the request,"To : yogesh@mallow-tech.com / anandhan@mallow-tech.com, admin-team@mallow-tech.com
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, sathish@mallow-tech.com, jayaprakash@mallow-tech.com, Team lead
+
+Subject : Hubble Access revoke request",,
+44,Hubble Reporting Person change,Change in User Reporting person,Respective Project BA to request,Project Owner / Team Lead / Executives Team to approve,Dinesh (BA team) (dineshckp@mallow-tech.com) will update the requested in Hubble.,Dinesh need to send email to the requester on the completion of the request,"To : Project Owner / Team Lead,dineshckp@mallow-tech.com
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, network-team@mallow-tech.com
+
+Subject : Request to Change in Project Reporting Person",,
+45,Hubble Timesheet / DayOff / TimeOff Approval access request,Hubble Timesheet / DayOff / TimeOff approval access,Individual employee to request,Team Lead / Project Owner to approve,Admin Team to take action,Admin team to send email to the requester on the completion of the request,"To : Project Owner / Team Lead, admin-team@mallow-tech.com
+
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, sathish@mallow-tech.com, hr@mallow-tech.com
+
+Subject : Hubble Access request - Timesheet / DayOff / TimeOff",,
+46,Exit process,To revoke Access for relieved employee,HR to initiate the email to revoke the access to related project and team members,-,"Project BA, Project Owner, Reporting Person, Team Lead, Network and Admin team
+","On revoking the related access, confirm to HR.
+
+HR to send an email to ciso@mallow-tech.com, once all have confirmed on the access revocation","To : Project BA, Project Owner, Team Lead, network-team@mallow-tech.com, admin-team@mallow-tech.com, Reporting Person email ID,nilanth@mallow-tech.com
+
+CC : pm@mallow-tech.com, ciso@mallow-tech.com
+
+Subject : Exiting process - (Name of the employee)",,
+47,Creation of New Project in Hubble,To create an Project in Hubble,"BA / Project Owner to request, with the Project name that needs to be created in the Hubble",Sathish Prabhu (sathish@mallow-tech.com) to approve,Dinesh (BA team) (dineshckp@mallow-tech.com) to create the requested Project.,Dinesh BA has to confirm the requester on creation of the Project.,"To : sathish@mallow-tech.com, dineshckp@mallow-tech.com,
+CC: ciso@mallow-tech.com, pm@mallow-tech.com, Project Owner.
+
+Subject : Request for creation of project in Hubble",,
+48,,To close an Project in Hubble,"BA / Project Owner to request, with the Project name.",Sathish Prabhu (sathish@mallow-tech.com) to approve,Dinesh (BA team) (dineshckp@mallow-tech.com) will close the requested Project.,Dinesh BA team has to confirm the requester that the request is actioned.,"To : sathish@mallow-tech.com, dineshckp@mallow-tech.com,
+CC: ciso@mallow-tech.com, pm@mallow-tech.com, Project Owner.
+
+Subject : Request for Close of Project in Hubble.",,
+49,User Details update/change in Hubble (any changes after creation),To be updated by Admin team / HR team,Individual Employee to request,HR team to approve,Admin Team to take action,HR Team / Admin Team to confirm back the requester that the details are updated in Hubble.,"To : hr@mallow-tech.com, admin-team@mallow-tech.com
+CC: ciso@mallow-tech.com, pm@mallow-tech.com
+
+Subject : Request for Hubble Profile Updation ",,
+50,Creation of New Designation / Role,To create a New Designation / Role in Hubble,HR Associate to request,Executives Team to approve,HR Admin to action,HR Admin to confirm back the requester that the Designation / Role has been created.,"To : hr@mallow-tech.com, pm@mallow-tech.com
+CC: ciso@mallow-tech.com
+
+Subject : Request Approval for New Designation / Role creation in Hubble",,
+51,Taking Office Assests,"To Taking Office devices to Home
+
+(Mobile / Printer / Cables / Monitor / Keyboard / Mouse / Headset / Pen Drive / Hard disk etc.)",Individual Employee to request access,Project Owner / Team Lead / Executives Team to approve,Individual Employee to co-ordinate with the help of the Network team,"Once the user received the device, then acknowledgement needs to be provided. After the completion of work, the user need to return the device to the Network team and the Network team needs to verfiy and send a confirmation email.","To : Project Owner / Team Lead / network-team@mallow-tech.com
+CC: pm@mallow-tech.com, ciso@mallow-tech.com, yogesh@mallow-tech.com, Project BA
+
+Subject : Request to Take office Assset to Home
+
+Note:
+Device Manager for iOS - arunachalam@mallow-tech.com
+Device Manager for Android - dhanaprakash@mallow-tech.com",,
+52,,Carry Office Assets other than Home,Individual Employee to request mentioning the details of the device and the purpose,Project Owner / Team Lead / Executives Team to approve,"Based on the approval, the individual employee can take the necessary step","Once the individual employee back to office, they should check with Network team for a General Check up. Once it is done, Network team will reply back.","To : Project Owner / Team Lead / pm@mallow-tech.com
+CC: ciso@mallow-tech.com, network-team@mallow-tech.com, Project BA, Team lead, Reporting Person
+
+Subject : Approval request to carry xxx",,
+53,Access for Codekalam tool,Creation of a new user in Codekalam,Individual Employee / HR Team to request for User creation,Recruitment Drive Incharge (murali@mallow-tech.com)  / Executives Team to approve,Recruitment Drive Incharge (nilanth@mallow-tech.com) to create the user in the tool,Recruitment Drive Incharge (nilanth@mallow-tech.com) to confirm to the requester back that the new user is created,"To : murali@mallow-tech.com,nilanth@mallow-tech.com
+CC: pm@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com
+
+Subject : Request for User Creation in Codekalam",,
+54,,Access for existing User for Particular Drive Contest,Individual Employee / HR team to request mentioning the Drive Contest name,Recruitment Drive Incharge (murali@mallow-tech.com)  / Executives Team to approve,Recruitment Drive Incharge (nilanth@mallow-tech.com) to grant access for the user,Recruitment Drive Incharge (nilanth@mallow-tech.com) to confirm to the requester back that the access is granted,"To : murali@mallow-tech.com,nilanth@mallow-tech.com
+CC: pm@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com, hr@mallow-tech.com
+
+Subject : Request access for Drive in Codekalam",,
+55,,Revoke User access for Particular Drive Contest,HR team to request mentioning the Drive Contest name,Recruitment Drive Incharge (murali@mallow-tech.com)  / Executives Team to approve,Recruitment Drive Incharge (nilanth@mallow-tech.com) to grant access for the user,Recruitment Drive Incharge (nilanth@mallow-tech.com) to confirm to the requester back that the access is granted,"To : murali@mallow-tech.com,nilanth@mallow-tech.com
+CC: pm@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com
+
+Subject : Revoke access for Drive contest in Codekalam",,
+56,,Creation of a new user in Codekalam for Internal Training along with Team / Contest,HR Team to request for User creation for Internal Training.,Training Incharge (dineshckp@mallow-tech.com)  / Executives Team to approve,Recruitment Drive Incharge (nilanth@mallow-tech.com) to create the user in the tool,Recruitment Drive Incharge (nilanth@mallow-tech.com) to confirm to the requester back that the new user is created,"To : yogesh@mallow-tech.com,anandhan@mallow-tech.com,nilanth@mallow-tech.com
+CC: pm@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com
+
+Subject : Request for User Creation in Codekalam for Mentors",,
+57,,Revoke User access for Internal Training for Contest,HR Team to request access revoke for Internal Training.,Training Incharge (dineshckp@mallow-tech.com)  / Executives Team to approve,Recruitment Drive Incharge (nilanth@mallow-tech.com) to revoke access for the contest.,Recruitment Drive Incharge (nilanth@mallow-tech.com) to confirm to the requester back that the access is granted,"To : yogesh@mallow-tech.com,anandhan@mallow-tech.com,nilanth@mallow-tech.com
+CC: pm@mallow-tech.com, network-team@mallow-tech.com, ciso@mallow-tech.com
+
+Subject : Request for revoke access for the Contest",,
+58,Creation of a New Teams Group in Microsoft Teams,Creation of New Team in MS Teams,Project BA / Team Lead / Team owner to request for creation to Network Team (network-team@mallow-tech.com),Project Owner / Executives Team to approve,Network Team to provide,Network team to send email to the requester on the completion of the request,"To : Project Owner, pm@mallow-tech.com, network-team@mallow-tech.com
+CC: ciso@mallow-tech.com
+
+Subject : Request for MS Team group creation",,
+59,Work Location Change request,Change in User work location,Individual Employee to request along with the reason,Project Owner / Executives Team to approve (Before approval the Project Owner needs to check with the Admin / HR team for the seating and other),Admin Team to take action,Admin team to send email to the requester on the completion of the request,"To : Project Owner, pm@mallow-tech.com
+CC: ciso@mallow-tech.com, network-team@mallow-tech.com, admin-team@mallow-tech.com,  hr@mallow-tech.com, Team Lead and Reporting Person
+
+Subject : Request to change in work Location
+
+Note : For Temporary and Permanent ",,
+60,Team Change request,Change in User Team,Individual Employee / BA Team / Team Owner to request,Executives Team to approve,HR Admin to action,HR Admin to confirm back the requester that the Team has been changed,"To : pm@mallow-tech.com
+CC: ciso@mallow-tech.com,hr@mallow-tech.com,admin-team@mallow-tech.com,network-team@mallow-tech.com,Team Lead/Owner (Both teams), Project Owner, Project BA, Reporting Person(Both teams)
+
+Subject : Request Approval for change of Team from ABC to YYY",,
+61,Access for Firebase / Google analytics / Google Console / Crashlytics,Access to Firebase / Google analytics / console / Crashlytics,Individual Employee to request mentioning the details and use,Project Owner / Team Lead / Executives Team to approve,Project Owner/Senior Developer need to provide the access,Project Owner / Senior Developer to confirm back the requester on the access,"To : Project Owner
+
+CC : Project BA, pm@mallow-tech.com, ciso@mallow-tech.com, pm@mallow-tech.com
+
+Subject : Request on App Store account access for (Project name)",,
+62,Any Certification purchase,"AWS Cloud Practitioner / Solution Architect, etc.",Individual Employee to request mentioning the details and use in detail,Project Owner / Team Lead  and Executives Team to approve,Concern person do to payment / purchase / upgrade with the help of Finance Team,Finance Team to confirm the requester on the purchase,"To : Project Owner/ Team owner / pm@mallow-tech.com, finance@mallow-tech.com
+CC: ciso@mallow-tech.com, network-team@mallow-tech.com, Reporting Persom email ID
+
+Subject : Request for Purchase of XXXX
+
+Note : 
+1. User needs to user only Official Id i.e. Mallow Tech email, approver needs confirm the same before approval.
+2. Need to mention the exact payment amount in the email.
+3. All Payment request needs to be approved by Kamal for 2nd level approval.",,
+63,Creating email auto-forwarder for induvial mailbox,Create a rule for forwarding emails to another email address(Internal/External),Individual Employee to request mentioning the details and use in detail,Project Owner / Team Lead to approve,Network Team,,"To : Project Owner/ Team owner 
+CC: ciso@mallow-tech.com, network-team@mallow-tech.com,pm@mallow-tech.com and Reporting Persom email ID
+
+Subject : Request for creating  email forwarder for XXXX
+
+Note : 
+1. Need to mention the receiver email ids
+2. If it its a temporary task must to mention the time period
+3. Need to mention the email unique identifier like Subject or Message body contains specific words",,
+64,Work Schedule Change request,Change in Work Schedule,Individual Employee to request along with the reason,Project Owner / Executives Team to approve,HR Team to take action,HR team to send email to the requester on the completion of the request,"To : Project Owner, pm@mallow-tech.com
+CC: ciso@mallow-tech.com, network-team@mallow-tech.com, admin-team@mallow-tech.com,  hr@mallow-tech.com, Project BA, Team Lead and Reporting Person
+
+Subject : Request to change in work schedule
+
+Note : Work Schedule change request needs to be approved by Kamal for 2nd level approval. ",,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,"Notes:
+1. If any Primary Approver is not available, the approval request can be escalated to either the Secondary Approver or the Team Lead or Executive of the beneficiary.
+
+2. Kindly loop ciso@mallow-tech.com in all the request emails.
+
+3. Kindly loop finance@mallow-tech.com in all the Finace related transactions.
+
+4. For all the Finance transaction, Kamal needs to do Second level approval",Last Updated on : 21 August 2025,"s
+",,,,,,
