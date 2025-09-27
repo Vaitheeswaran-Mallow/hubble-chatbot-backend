@@ -10,8 +10,8 @@ import logging
 # Add src to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from core.data_processor import EndorsementDataProcessor
-from config import config
+from ..core.data_processor import EndorsementDataProcessor
+from ..config import config
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)

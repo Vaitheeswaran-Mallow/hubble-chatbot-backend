@@ -1,6 +1,6 @@
 from langchain_openai import ChatOpenAI
 from typing import List, Dict, Any, Optional
-from settings import config
+from ..config import config
 import json
 
 

@@ -1,7 +1,7 @@
 from langchain_openai import OpenAIEmbeddings
 from typing import List, Dict, Any
 import asyncio
-from settings import config
+from ..config import config
 
 
 class EmbeddingService:

@@ -5,18 +5,14 @@ Test script for the Endorsement Process RAG System
 
 import os
 import sys
-
-# Add src to path for imports
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-
-from core.data_processor import EndorsementDataProcessor
-from services.rag_system import EndorsementRAGSystem
+from data_processor import EndorsementDataProcessor
+from rag_system import EndorsementRAGSystem
 
 def test_data_processor():
     """Test the data processor"""
     print("🧪 Testing Data Processor...")
     
-    processor = EndorsementDataProcessor('data/Endorsement Process Excel.xlsx')
+    processor = EndorsementDataProcessor('/Users/yuvaraj/Downloads/Mallow Hackathon 2025/Endorsement Process Excel.xlsx')
     
     # Load data
     df = processor.load_data()
@@ -56,7 +52,7 @@ def test_rag_system():
         # Initialize RAG system
         rag_system = EndorsementRAGSystem(
             openai_api_key=api_key,
-            excel_file_path='data/Endorsement Process Excel.xlsx'
+            excel_file_path='/Users/yuvaraj/Downloads/Mallow Hackathon 2025/Endorsement Process Excel.xlsx'
         )
         
         # Initialize system

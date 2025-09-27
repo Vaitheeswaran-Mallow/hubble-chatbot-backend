@@ -9,9 +9,9 @@ import sys
 # Add src to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from config import config
-from services.rag_system import EndorsementRAGSystem
-from models.schemas import (
+from ..config import config
+from ..services.rag_system import EndorsementRAGSystem
+from ..models.api_schemas import (
     QueryRequest, QueryResponse, ProcessResponse, 
     SystemStatsResponse, CategoryResponse, ProcessesByCategoryResponse
 )

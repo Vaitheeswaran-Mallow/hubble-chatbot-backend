@@ -2,7 +2,7 @@ import chromadb
 from chromadb.config import Settings
 from typing import List, Dict, Any, Optional
 import uuid
-from db import get_chroma_client
+from ..core.db import get_chroma_client
 
 
 class VectorStore:
