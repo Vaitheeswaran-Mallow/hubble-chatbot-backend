@@ -7,8 +7,7 @@ from document_processor import DocumentProcessor
 from embedding_service import EmbeddingService
 from vector_store import VectorStore
 from answer_service import AnswerService
-from typing import List, Dict, Any
-import asyncio
+from schemas import AskQuestion
 
 app = FastAPI(title="Hubble Chatbot Backend")
 
@@ -232,9 +231,7 @@ def recreate_collection(vector_store=Depends(get_vector_store)):
 
 @app.post("/ask-question/")
 async def ask_question(
-    question: str,
-    n_results: int = 5,
-    include_follow_ups: bool = True,
+    params: AskQuestion,
     embedding_service=Depends(get_embedding_service),
     vector_store=Depends(get_vector_store),
     answer_service=Depends(get_answer_service)
@@ -249,21 +246,21 @@ async def ask_question(
     """
     try:
         # Generate embedding for the question
-        query_embedding = embedding_service.generate_embedding(question)
+        query_embedding = embedding_service.generate_embedding(params.question)
         
         # Search for relevant documents
-        search_results = vector_store.search_similar(query_embedding, n_results)
+        search_results = vector_store.search_similar(query_embedding, params.n_results)
         
         # Generate answer using LLM
-        answer_data = answer_service.generate_answer(question, search_results)
+        answer_data = answer_service.generate_answer(params.question, search_results)
         
         # Add follow-up questions if requested
-        if include_follow_ups and answer_data.get("confidence") != "error":
-            follow_ups = answer_service.generate_follow_up_questions(question, search_results)
+        if answer_data.get("confidence") != "error":
+            follow_ups = answer_service.generate_follow_up_questions(params.question, search_results)
             answer_data["follow_up_questions"] = follow_ups
         
         return {
-            "question": question,
+            "question": params.question,
             "answer": answer_data["answer"],
             "confidence": answer_data["confidence"],
             "sources": answer_data["sources"],
