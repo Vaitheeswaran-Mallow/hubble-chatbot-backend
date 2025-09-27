@@ -2,8 +2,13 @@ from fastapi import FastAPI, Depends
 from settings import config
 from langchain_openai import OpenAI
 from db import get_chroma_client
+from markitdown import MarkItDown
 
 app = FastAPI(title="Hubble Chatbot Backend")
+
+def get_markdown_converter():
+    """Initialize and return a Markitdown instance."""
+    return MarkItDown(enable_plugins=False)
 
 
 @app.get("/")
@@ -29,3 +34,8 @@ def db_test(chroma_db=Depends(get_chroma_client)):
         return {"status": "ChromaDB is reachable"}
     else:
         return {"status": "ChromaDB is not reachable"}
+
+@app.get("/convert-to-markdown/")
+def convert_to_markdown(md=Depends(get_markdown_converter)):
+    result = md.convert("./docs/New Leave policy.pdf")
+    return {"converted_text": result}
