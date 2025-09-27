@@ -5,6 +5,7 @@ from typing import List, Dict, Any, Optional
 class AskQuestion(BaseModel):
     question: str
     n_results: int = 3
+    user_id: str
 
 
 class QueryRequest(BaseModel):

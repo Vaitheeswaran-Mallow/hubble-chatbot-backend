@@ -27,6 +27,9 @@ from ..models.api_schemas import (
 )
 from langchain_openai import OpenAI
 from markitdown import MarkItDown
+from fastapi import Request, BackgroundTasks
+import json
+import httpx
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -475,7 +478,9 @@ async def ask_question(
     params: AskQuestion,
     embedding_service=Depends(get_embedding_service),
     vector_store=Depends(get_vector_store),
-    answer_service=Depends(get_answer_service)
+    answer_service=Depends(get_answer_service),
+    background_tasks: BackgroundTasks = None,
+    request: Request = None,
 ):
     """
     Ask a question and get an intelligent answer based on document content.
@@ -486,32 +491,44 @@ async def ask_question(
         include_follow_ups: Whether to include suggested follow-up questions
     """
     try:
-        # Generate embedding for the question
-        query_embedding = embedding_service.generate_embedding(params.question)
+        if background_tasks is None or request is None:
+            raise HTTPException(status_code=500, detail="Background tasks or request not available")
 
-        # Search for relevant documents
-        search_results = vector_store.search_similar(query_embedding, params.n_results)
+        publish_url = request.url_for("publish_room_message", room=params.user_id)
 
-        # Generate answer using LLM
-        answer_data = answer_service.generate_answer(params.question, search_results)
+        async def process_and_publish():
+            try:
+                query_embedding = embedding_service.generate_embedding(params.question)
+                search_results = vector_store.search_similar(query_embedding, params.n_results)
+                answer_data = answer_service.generate_answer(params.question, search_results)
 
-        # Add follow-up questions if requested
-        if answer_data.get("confidence") != "error":
-            follow_ups = answer_service.generate_follow_up_questions(params.question, search_results)
-            answer_data["follow_up_questions"] = follow_ups
+                if answer_data.get("confidence") != "error":
+                    follow_ups = answer_service.generate_follow_up_questions(params.question, search_results)
+                    answer_data["follow_up_questions"] = follow_ups
 
-        return {
-            "question": params.question,
-            "answer": answer_data["answer"],
-            "confidence": answer_data["confidence"],
-            "sources": answer_data["sources"],
-            "search_results_count": answer_data["search_results_count"],
-            "model_used": answer_data["model_used"],
-            "follow_up_questions": answer_data.get("follow_up_questions", [])
-        }
+                payload = {
+                    "type": "answer",
+                    "user_id": params.user_id,
+                    "question": params.question,
+                    "answer": answer_data.get("answer"),
+                    "confidence": answer_data.get("confidence"),
+                    "sources": answer_data.get("sources"),
+                    "search_results_count": answer_data.get("search_results_count"),
+                    "model_used": answer_data.get("model_used"),
+                    "follow_up_questions": answer_data.get("follow_up_questions", []),
+                }
+
+                async with httpx.AsyncClient(timeout=10.0) as client:
+                    await client.post(str(publish_url), params={"message": json.dumps(payload)})
+            except Exception as bg_err:
+                logger.error(f"Background processing failed: {bg_err}")
+
+        background_tasks.add_task(process_and_publish)
+
+        return {"status": "success", "queued": True}
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to generate answer: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to queue question: {str(e)}")
 
 @app.post("/ask-detailed/")
 async def ask_detailed_question(
