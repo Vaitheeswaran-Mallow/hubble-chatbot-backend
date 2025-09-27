@@ -526,6 +526,7 @@ async def ask_question(
                     "type": "answer",
                     "user_id": params.user_id,
                     "answer": answer_data.get("answer"),
+                    "question": params.question,
                     "confidence": answer_data.get("confidence"),
                     "sources": answer_data.get("sources"),
                     "search_results_count": answer_data.get("search_results_count"),
