@@ -89,7 +89,8 @@ Answer:"""
                 "answer": "I don't have any relevant information to answer your question. Please try rephrasing your question or check if the document has been processed.",
                 "sources": [],
                 "confidence": "low",
-                "model_used": self.model_name
+                "model_used": self.model_name,
+                "search_results_count": 0
             }
         
         # Create context-aware prompt
