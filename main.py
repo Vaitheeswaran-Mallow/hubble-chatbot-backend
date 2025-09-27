@@ -8,6 +8,10 @@ from embedding_service import EmbeddingService
 from vector_store import VectorStore
 from answer_service import AnswerService
 from schemas import AskQuestion
+from fastapi.responses import FileResponse
+import asyncio
+from ws import router, manager
+from ws.upstream import receiver_loop
 
 app = FastAPI(title="Hubble Chatbot Backend")
 
@@ -41,6 +45,12 @@ def extract_markdown_content(conversion_result):
     else:
         # If it's already a string, use it directly
         return str(conversion_result)
+
+
+@app.on_event("startup")
+async def startup_tasks():
+    if config.ws_upstream_url:
+        asyncio.create_task(receiver_loop(config.ws_upstream_url, manager))
 
 
 @app.get("/")
@@ -85,7 +95,7 @@ async def process_document(
 ):
     """
     Process a document: convert to markdown, chunk, embed, and store in vector database.
-    
+
     Args:
         document_path: Path to the document file
         document_name: Optional name for the document (defaults to filename)
@@ -94,31 +104,31 @@ async def process_document(
         # Convert document to markdown
         conversion_result = md.convert(document_path)
         markdown_content = extract_markdown_content(conversion_result)
-        
+
         # Use filename as document name if not provided
         if not document_name:
             import os
             document_name = os.path.basename(document_path)
-        
+
         # Process document into chunks
         chunks = processor.process_document(markdown_content, document_name)
-        
+
         # Generate embeddings for chunks
         chunks_with_embeddings = await embedding_service.process_chunks_with_embeddings_async(chunks)
-        
+
         # Store in vector database
         store_result = vector_store.add_documents(chunks_with_embeddings)
-        
+
         # Get processing statistics
         stats = processor.get_chunk_stats(chunks)
-        
+
         return {
             "status": "success",
             "document_name": document_name,
             "processing_stats": stats,
             "vector_store_result": store_result
         }
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Document processing failed: {str(e)}")
 
@@ -132,7 +142,7 @@ async def query_documents(
 ):
     """
     Query documents using semantic search.
-    
+
     Args:
         query: Search query text
         n_results: Number of results to return (default: 5)
@@ -140,16 +150,16 @@ async def query_documents(
     try:
         # Generate embedding for the query
         query_embedding = embedding_service.generate_embedding(query)
-        
+
         # Search for similar documents
         results = vector_store.search_similar(query_embedding, n_results)
-        
+
         return {
             "query": query,
             "results": results,
             "total_results": len(results)
         }
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Query failed: {str(e)}")
 
@@ -162,7 +172,7 @@ def search_documents(
 ):
     """
     Search documents using text-based search (ChromaDB handles embedding internally).
-    
+
     Args:
         query: Search query text
         n_results: Number of results to return (default: 5)
@@ -170,13 +180,13 @@ def search_documents(
     try:
         # Search using ChromaDB's built-in text search
         results = vector_store.search_by_text(query, n_results)
-        
+
         return {
             "query": query,
             "results": results,
             "total_results": len(results)
         }
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}")
 
@@ -210,13 +220,13 @@ def recreate_collection(vector_store=Depends(get_vector_store)):
     try:
         # Delete existing collection
         vector_store.client.delete_collection(name=vector_store.collection_name)
-        
+
         # Create new collection
         vector_store.collection = vector_store.client.create_collection(
             name=vector_store.collection_name,
             metadata={"description": "Document embeddings for semantic search"}
         )
-        
+
         return {
             "status": "success",
             "message": "Collection recreated successfully",
@@ -238,7 +248,7 @@ async def ask_question(
 ):
     """
     Ask a question and get an intelligent answer based on document content.
-    
+
     Args:
         question: The question to ask about the documents
         n_results: Number of relevant chunks to retrieve (default: 5)
@@ -247,18 +257,18 @@ async def ask_question(
     try:
         # Generate embedding for the question
         query_embedding = embedding_service.generate_embedding(params.question)
-        
+
         # Search for relevant documents
         search_results = vector_store.search_similar(query_embedding, params.n_results)
-        
+
         # Generate answer using LLM
         answer_data = answer_service.generate_answer(params.question, search_results)
-        
+
         # Add follow-up questions if requested
         if answer_data.get("confidence") != "error":
             follow_ups = answer_service.generate_follow_up_questions(params.question, search_results)
             answer_data["follow_up_questions"] = follow_ups
-        
+
         return {
             "question": params.question,
             "answer": answer_data["answer"],
@@ -268,7 +278,7 @@ async def ask_question(
             "model_used": answer_data["model_used"],
             "follow_up_questions": answer_data.get("follow_up_questions", [])
         }
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to generate answer: {str(e)}")
 
@@ -284,7 +294,7 @@ async def ask_detailed_question(
 ):
     """
     Ask a question and get a detailed answer with full source information.
-    
+
     Args:
         question: The question to ask about the documents
         n_results: Number of relevant chunks to retrieve (default: 5)
@@ -293,15 +303,15 @@ async def ask_detailed_question(
     try:
         # Generate embedding for the question
         query_embedding = embedding_service.generate_embedding(question)
-        
+
         # Search for relevant documents
         search_results = vector_store.search_similar(query_embedding, n_results)
-        
+
         # Generate detailed answer
         answer_data = answer_service.generate_answer_with_sources(
             question, search_results, include_full_context
         )
-        
+
         return {
             "question": question,
             "answer": answer_data["answer"],
@@ -312,7 +322,7 @@ async def ask_detailed_question(
             "model_used": answer_data["model_used"],
             "full_context": answer_data.get("full_context", [])
         }
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to generate detailed answer: {str(e)}")
 
@@ -327,7 +337,7 @@ async def chat(
 ):
     """
     Simple chat interface for asking questions about documents.
-    
+
     Args:
         message: The message/question to ask
         n_results: Number of relevant chunks to retrieve (default: 5)
@@ -335,16 +345,16 @@ async def chat(
     try:
         # Generate embedding for the message
         query_embedding = embedding_service.generate_embedding(message)
-        
+
         # Search for relevant documents
         search_results = vector_store.search_similar(query_embedding, n_results)
-        
+
         # Generate answer
         answer_data = answer_service.generate_answer(message, search_results)
-        
+
         # Generate follow-up questions
         follow_ups = answer_service.generate_follow_up_questions(message, search_results)
-        
+
         return {
             "message": message,
             "response": answer_data["answer"],
@@ -352,6 +362,14 @@ async def chat(
             "sources_count": len(answer_data["sources"]),
             "follow_up_suggestions": follow_ups
         }
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Chat failed: {str(e)}")
+
+
+@app.get("/test/ws")
+async def get_ws_test():
+    return FileResponse("static/ws.html")
+
+
+app.include_router(router)

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Rooms WS Test</title>
+        <style>
+            body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; }
+            form { margin: 0.5rem 0; }
+            input { padding: 0.4rem; }
+            button { padding: 0.4rem 0.8rem; }
+            ul { list-style: none; padding: 0; }
+            li { padding: 0.25rem 0; border-bottom: 1px solid #eee; }
+        </style>
+    </head>
+    <body>
+        <h1>WebSocket Rooms</h1>
+        <form action="" onsubmit="connect(event)">
+            <input type="text" id="room" placeholder="room (default: lobby)" autocomplete="off"/>
+            <button>Connect</button>
+        </form>
+        <form action="" onsubmit="sendMessage(event)">
+            <input type="text" id="messageText" placeholder="message" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+        <ul id='messages'></ul>
+        <script>
+            var ws = null;
+            function wsProto() { return location.protocol === 'https:' ? 'wss' : 'ws'; }
+            function connect(event) {
+                var room = document.getElementById('room').value || 'lobby';
+                if (ws) { ws.close(); }
+                ws = new WebSocket(wsProto() + '://' + location.host + '/ws/rooms/' + encodeURIComponent(room));
+                ws.onmessage = function(event) {
+                    var messages = document.getElementById('messages')
+                    var message = document.createElement('li')
+                    var content = document.createTextNode(event.data)
+                    message.appendChild(content)
+                    messages.appendChild(message)
+                };
+                event.preventDefault();
+            }
+            function sendMessage(event) {
+                if (!ws) { alert('connect first'); event.preventDefault(); return; }
+                var input = document.getElementById("messageText")
+                ws.send(input.value)
+                input.value = ''
+                event.preventDefault()
+            }
+        </script>
+    </body>
+</html> 
