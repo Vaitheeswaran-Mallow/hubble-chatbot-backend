@@ -1,14 +1,23 @@
-from fastapi import FastAPI
-from settings import config
+#!/usr/bin/env python3
+"""
+Main entry point for the Endorsement Process RAG System
+"""
 
-app = FastAPI(title="Hubble Chatbot Backend")
+import sys
+import os
 
+# Add src to path for imports
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
-@app.get("/")
-def hello_world():
-    return {"message": "Hello, World!"}
+from src.api.main import app
 
-
-@app.get("/config")
-def get_config():
-    return {"open_api_key": config.open_api_key}
+if __name__ == "__main__":
+    import uvicorn
+    from src.config import config
+    
+    uvicorn.run(
+        app,
+        host=config.api_host,
+        port=config.api_port,
+        reload=True
+    )
